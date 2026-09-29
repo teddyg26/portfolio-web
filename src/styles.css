@@ -1,0 +1,136 @@
+@import "tailwindcss" source(none);
+@source "../public/index.html";
+
+@layer base {
+  html {
+    /* Leave room for the two-row navigation on small screens. */
+    scroll-padding-top: 7rem;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: Canvas;
+    color: CanvasText;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-blue-600);
+    outline-offset: 4px;
+  }
+
+  @media (width >= 40rem) {
+    html {
+      scroll-padding-top: 5rem;
+    }
+  }
+}
+
+@layer components {
+  .site-header {
+    background: Canvas;
+  }
+
+  .skip-link {
+    position: fixed;
+    top: 0.5rem;
+    left: 0.5rem;
+    z-index: 20;
+    padding: 0.5rem 1rem;
+    background: Canvas;
+    transform: translateY(calc(-100% - 1rem));
+  }
+
+  .skip-link:focus {
+    transform: translateY(0);
+  }
+
+  .asset-placeholder {
+    display: grid;
+    place-items: center;
+    border: 1px dashed currentColor;
+    padding: 1rem;
+    font-size: var(--text-sm);
+    text-align: center;
+  }
+
+  .project {
+    display: grid;
+    align-items: start;
+    gap: 1.5rem;
+  }
+
+  .project-preview {
+    display: block;
+    min-width: 0;
+  }
+
+  .project-preview > img {
+    width: 100%;
+    height: auto;
+    transition: filter 150ms ease;
+  }
+
+  .text-link[href]:focus-visible {
+    color: var(--color-blue-600);
+    text-decoration: underline;
+  }
+
+  .project-preview[href]:focus-visible > img {
+    filter: brightness(0.8);
+  }
+
+  .button-link {
+    display: inline-block;
+    border: 1px solid currentColor;
+    padding: 0.5rem 1rem;
+  }
+
+  .button-link[href]:focus-visible {
+    border-color: var(--color-blue-600);
+    background: var(--color-blue-600);
+    color: var(--color-white);
+  }
+
+  @media (hover: hover) {
+    .text-link[href]:hover {
+      color: var(--color-blue-600);
+      text-decoration: underline;
+    }
+
+    .project-preview[href]:hover > img {
+      filter: brightness(0.8);
+    }
+
+    .button-link[href]:hover {
+      border-color: var(--color-blue-600);
+      background: var(--color-blue-600);
+      color: var(--color-white);
+    }
+  }
+
+  @media (width >= 48rem) {
+    .project {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .project:nth-child(even) .project-preview {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    .project:nth-child(even) .project-copy {
+      grid-column: 1;
+      grid-row: 1;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .project-preview > img {
+    transition: none;
+  }
+}
