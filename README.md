@@ -67,6 +67,9 @@ from the completed links. When replacing the GitHub and LinkedIn text with your
 chosen SVG logos, retain the links' accessible labels and use `currentColor` to
 follow the eventual palette.
 
-The current appearance uses browser canvas/text colors, system fonts, and
-Tailwind blue for interactive states. No broader palette has been selected.
+The full-width introduction uses deep charcoal with white text and fills the
+initial viewport below the sticky navbar. The full-width footer retains a gray
+background; its content aligns with the rest of the page. The résumé remains
+inside Projects without divider lines. The remaining content uses browser
+canvas/text colors, system fonts, and Tailwind blue for interactive states.
 Reduced-motion settings disable smooth scrolling and image transitions.

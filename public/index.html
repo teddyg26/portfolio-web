@@ -11,8 +11,8 @@
     <a class="skip-link" href="#main-content">Skip to content</a>
 
     <header class="site-header sticky top-0 z-10 border-b">
-      <nav class="mx-auto flex max-w-4xl flex-col gap-3 px-4 py-3 sm:flex-row sm:items-center sm:justify-between" aria-label="Main navigation">
-        <a class="text-link self-start font-semibold" href="#top">Home</a>
+      <nav class="mx-auto flex h-full max-w-4xl flex-col justify-center gap-3 px-4 py-3 sm:flex-row sm:items-center sm:justify-between" aria-label="Main navigation">
+        <a class="text-link self-start font-semibold sm:self-auto" href="#top">Home</a>
         <ul class="flex flex-wrap gap-x-6 gap-y-2" role="list">
           <li><a class="text-link" href="#about">About</a></li>
           <li><a class="text-link" href="#projects">Projects</a></li>
@@ -21,13 +21,15 @@
       </nav>
     </header>
 
-    <main class="mx-auto max-w-4xl px-4" id="main-content" tabindex="-1">
-      <div class="border-b py-10">
-        <h1 class="text-3xl font-semibold">Ted Garneau</h1>
-        <p class="mt-2 text-lg">Software Engineer</p>
+    <main id="main-content" tabindex="-1">
+      <div class="hero flex items-center bg-neutral-950 py-10 text-white">
+        <div class="mx-auto w-full max-w-4xl px-4">
+          <h1 class="text-3xl font-semibold">Ted Garneau</h1>
+          <p class="mt-2 text-lg">Software Engineer</p>
+        </div>
       </div>
 
-      <section class="border-b py-10" id="about" aria-labelledby="about-heading">
+      <section class="mx-auto max-w-4xl border-b px-4 py-10" id="about" aria-labelledby="about-heading">
         <h2 class="text-2xl font-semibold" id="about-heading">About Me</h2>
 
         <div class="mt-6 grid items-start gap-6 sm:grid-cols-[12rem_1fr]">
@@ -54,7 +56,7 @@
         </div>
       </section>
 
-      <section class="border-b py-10" id="projects" aria-labelledby="projects-heading">
+      <section class="mx-auto max-w-4xl px-4 py-10" id="projects" aria-labelledby="projects-heading">
         <h2 class="text-2xl font-semibold" id="projects-heading">Projects</h2>
 
         <!-- Duplicate a project article to add another entry. Desktop placement alternates automatically. -->
@@ -108,7 +110,7 @@
           </article>
         </div>
 
-        <div class="mt-10 border-t pt-6">
+        <div class="mt-10">
           <!-- TODO: Add href="./assets/resume.pdf" and download after adding your PDF; remove aria-disabled. -->
           <a class="button-link" role="link" aria-disabled="true">Download résumé (PDF)</a>
           <p class="mt-2 text-sm">Résumé PDF to be added.</p>
@@ -116,17 +118,19 @@
       </section>
     </main>
 
-    <footer class="mx-auto max-w-4xl px-4 py-10 bg-gray-500" id="contact" aria-labelledby="contact-heading">
-      <h2 class="text-2xl font-semibold" id="contact-heading">Contact Me</h2>
-      <div class="mt-4 flex flex-wrap items-center justify-between gap-4">
-        <!-- TODO: Add your public email address and mailto href; remove aria-disabled. -->
-        <p>Email: <a class="text-link" role="link" aria-disabled="true">address to be added</a></p>
-        <ul class="flex gap-6" role="list" aria-label="Social profiles">
-          <!-- TODO: Add profile hrefs and remove aria-disabled. Replace text with supplied SVG logos later. -->
-          <!-- Keep each link's accessible name; logos can use currentColor and aria-hidden="true". -->
-          <li><a class="text-link" role="link" aria-label="GitHub" aria-disabled="true">GitHub</a></li>
-          <li><a class="text-link" role="link" aria-label="LinkedIn" aria-disabled="true">LinkedIn</a></li>
-        </ul>
+    <footer class="bg-gray-500 py-10" id="contact" aria-labelledby="contact-heading">
+      <div class="mx-auto max-w-4xl px-4">
+        <h2 class="text-2xl font-semibold" id="contact-heading">Contact Me</h2>
+        <div class="mt-4 flex flex-wrap items-center justify-between gap-4">
+          <!-- TODO: Add your public email address and mailto href; remove aria-disabled. -->
+          <p>Email: <a class="text-link" role="link" aria-disabled="true">address to be added</a></p>
+          <ul class="flex gap-6" role="list" aria-label="Social profiles">
+            <!-- TODO: Add profile hrefs and remove aria-disabled. Replace text with supplied SVG logos later. -->
+            <!-- Keep each link's accessible name; logos can use currentColor and aria-hidden="true". -->
+            <li><a class="text-link" role="link" aria-label="GitHub" aria-disabled="true">GitHub</a></li>
+            <li><a class="text-link" role="link" aria-label="LinkedIn" aria-disabled="true">LinkedIn</a></li>
+          </ul>
+        </div>
       </div>
     </footer>
   </body>

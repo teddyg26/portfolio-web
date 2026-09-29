@@ -3,8 +3,9 @@
 
 @layer base {
   html {
-    /* Leave room for the two-row navigation on small screens. */
-    scroll-padding-top: 7rem;
+    /* Share the navbar height with the hero and anchor-scroll offsets. */
+    --header-height: 6rem;
+    scroll-padding-top: calc(var(--header-height) + 1rem);
     scroll-behavior: smooth;
   }
 
@@ -20,14 +21,20 @@
 
   @media (width >= 40rem) {
     html {
-      scroll-padding-top: 5rem;
+      --header-height: 4rem;
     }
   }
 }
 
 @layer components {
   .site-header {
+    height: var(--header-height);
     background: Canvas;
+  }
+
+  .hero {
+    min-height: calc(100vh - var(--header-height));
+    min-height: calc(100svh - var(--header-height));
   }
 
   .skip-link {
