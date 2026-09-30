@@ -1,0 +1,19 @@
+{
+  "name": "teddyg-portfolio",
+  "private": true,
+  "packageManager": "bun@1.4.2",
+  "scripts": {
+    "build": "sh scripts/build.sh",
+    "watch": "sh scripts/build.sh --watch",
+    "dev": "wrangler dev",
+    "login": "wrangler login",
+    "deploy:check": "wrangler deploy --dry-run",
+    "deploy": "wrangler deploy"
+  },
+  "trustedDependencies": [],
+  "devDependencies": {
+    "@tailwindcss/cli": "4.3.3",
+    "tailwindcss": "4.3.3",
+    "wrangler": "4.144.0"
+  }
+}

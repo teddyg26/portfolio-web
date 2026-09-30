@@ -1,0 +1,18 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "teddyg-portfolio",
+  "compatibility_date": "2026-09-29",
+  "workers_dev": false,
+  "preview_urls": false,
+  "routes": [
+    { "pattern": "teddyg.dev", "custom_domain": true }
+  ],
+  "assets": {
+    "directory": "./public",
+    "not_found_handling": "none"
+  },
+  "build": {
+    "command": "sh scripts/build.sh",
+    "watch_dir": ["src", "public/index.html"]
+  }
+}
