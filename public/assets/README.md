@@ -4,4 +4,4 @@
 - `icons/github.svg`: unmodified `GitHub_Invertocat_Black.svg` from https://brand.github.com/GitHub_Logos.zip, linked at https://brand.github.com/foundations/logo.
 - `icons/linkedin.svg`: the `inbug-blue-28` SVG path embedded in https://brand.linkedin.com/downloads, saved as a standalone SVG with black fill. The page's downloadable icon ZIP contains PNGs only, so the site's SVG is used instead.
 
-The logos retain their original proportions and link to the respective social profiles. CSS inverts their black fill to white on hover and keyboard focus.
+The logo paths are also inlined in `public/index.html` using `currentColor`, retaining their original proportions. They follow the active palette and transition to its primary text color over 200 ms on hover and keyboard focus.

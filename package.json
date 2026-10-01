@@ -3,6 +3,7 @@
   "private": true,
   "packageManager": "bun@1.4.2",
   "scripts": {
+    "test": "bun test",
     "build": "sh scripts/build.sh",
     "watch": "sh scripts/build.sh --watch",
     "dev": "wrangler dev",

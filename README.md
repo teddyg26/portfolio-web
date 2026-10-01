@@ -173,9 +173,24 @@ from the completed links. When replacing the GitHub and LinkedIn text with your
 chosen SVG logos, retain the links' accessible labels and use `currentColor` to
 follow the eventual palette.
 
-The full-width introduction uses deep charcoal with white text and fills the
-initial viewport below the sticky navbar. The full-width footer retains a gray
-background; its content aligns with the rest of the page. The résumé remains
-inside Projects without divider lines. The remaining content uses browser
-canvas/text colors, system fonts, and Tailwind blue for interactive states.
-Reduced-motion settings disable smooth scrolling and image transitions.
+## Appearance
+
+The site uses [Catppuccin](https://catppuccin.com/palette/) Frappé for dark mode
+and Latte for light mode, with neutral surfaces and text to maintain a muted
+appearance. JetBrains Mono is self-hosted. The hero fills the initial viewport
+below the sticky navbar.
+
+Without a saved choice, the site follows `prefers-color-scheme`, with Frappé as
+the fallback. The Theme button beside Home switches between Frappé and Latte;
+`portfolio-theme` in local storage remembers the choice across visits and tabs.
+Clearing that entry restores system preference tracking. Storage restrictions
+do not prevent toggling for the current visit. With JavaScript disabled, system
+preferences still work and the toggle stays hidden.
+
+The `color-scheme` property matches the active palette. Dark Reader remains free
+to apply the visitor's settings; its **Detect dark theme** option can leave the
+native dark palette untouched. No extension-specific overrides or locks are
+injected. Actual extension behavior depends on its mode and settings.
+
+Reduced-motion settings disable the typewriter and cursor animations, smooth
+scrolling, and image/icon transitions. Run `bun test` for theme preference tests.

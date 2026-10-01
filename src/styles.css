@@ -23,19 +23,68 @@
 
 @layer base {
   html {
+    /* Catppuccin Frappé is the default; only neutral palette colors are used. */
+    color-scheme: dark;
+    --page: #303446;
+    --text: #c6d0f5;
+    --muted: #b5bfe2;
+    --header: #292c3c;
+    --hero: #232634;
+    --surface: #414559;
+    --border: #626880;
+    --interactive: #c6d0f5;
+    --on-interactive: #303446;
     /* Share the navbar height with the hero and anchor-scroll offsets. */
     --header-height: 6rem;
     scroll-padding-top: calc(var(--header-height) + 1rem);
     scroll-behavior: smooth;
   }
 
+  /* An explicit choice takes priority over the OS preference. */
+  @media (prefers-color-scheme: light) {
+    html:not([data-theme]) {
+      color-scheme: light;
+      --page: #eff1f5;
+      --text: #4c4f69;
+      --muted: #5c5f77;
+      --header: #e6e9ef;
+      --hero: #dce0e8;
+      --surface: #ccd0da;
+      --border: #acb0be;
+      --interactive: #4c4f69;
+      --on-interactive: #eff1f5;
+    }
+  }
+
+  html[data-theme="light"] {
+    color-scheme: light;
+    --page: #eff1f5;
+    --text: #4c4f69;
+    --muted: #5c5f77;
+    --header: #e6e9ef;
+    --hero: #dce0e8;
+    --surface: #ccd0da;
+    --border: #acb0be;
+    --interactive: #4c4f69;
+    --on-interactive: #eff1f5;
+  }
+
   body {
-    background: Canvas;
-    color: CanvasText;
+    background: var(--page);
+    color: var(--text);
+  }
+
+  *, ::before, ::after {
+    border-color: var(--border);
+  }
+
+  ::selection {
+    background: var(--text);
+    color: var(--page);
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-blue-600);
+    outline: 2px solid var(--interactive);
     outline-offset: 4px;
   }
 
@@ -49,10 +98,26 @@
 @layer components {
   .site-header {
     height: var(--header-height);
-    background: Canvas;
+    background: var(--header);
+  }
+
+  .site-footer {
+    background: var(--surface);
+  }
+
+  .theme-toggle {
+    cursor: pointer;
+    color: var(--muted);
+  }
+
+  .theme-toggle:hover,
+  .theme-toggle:focus-visible {
+    color: var(--text);
+    text-decoration: underline;
   }
 
   .hero {
+    background: var(--hero);
     min-height: calc(100vh - var(--header-height));
     min-height: calc(100svh - var(--header-height));
   }
@@ -63,6 +128,7 @@
   }
 
   .hero-title {
+    color: var(--muted);
     font-size: 1.40625rem; /* 125% of the original 1.125rem. */
     line-height: 1.75rem;
   }
@@ -95,18 +161,18 @@
     place-items: center;
     width: 44px;
     height: 44px;
+    color: var(--muted);
+    transition: color 200ms ease;
   }
 
-  .social-link img {
+  .social-link svg {
     width: 32px;
     height: 32px;
-    object-fit: contain;
-    transition: filter 200ms ease;
   }
 
-  .social-link:hover img,
-  .social-link:focus-visible img {
-    filter: invert(1);
+  .social-link:hover,
+  .social-link:focus-visible {
+    color: var(--text);
   }
 
   .skip-link {
@@ -115,7 +181,7 @@
     left: 0.5rem;
     z-index: 20;
     padding: 0.5rem 1rem;
-    background: Canvas;
+    background: var(--page);
     transform: translateY(calc(-100% - 1rem));
   }
 
@@ -124,6 +190,8 @@
   }
 
   .asset-placeholder {
+    background: var(--header);
+    color: var(--muted);
     display: grid;
     place-items: center;
     border: 1px dashed currentColor;
@@ -150,7 +218,7 @@
   }
 
   .text-link[href]:focus-visible {
-    color: var(--color-blue-600);
+    color: var(--interactive);
     text-decoration: underline;
   }
 
@@ -165,14 +233,14 @@
   }
 
   .button-link[href]:focus-visible {
-    border-color: var(--color-blue-600);
-    background: var(--color-blue-600);
-    color: var(--color-white);
+    border-color: var(--interactive);
+    background: var(--interactive);
+    color: var(--on-interactive);
   }
 
   @media (hover: hover) {
     .text-link[href]:hover {
-      color: var(--color-blue-600);
+      color: var(--interactive);
       text-decoration: underline;
     }
 
@@ -181,9 +249,9 @@
     }
 
     .button-link[href]:hover {
-      border-color: var(--color-blue-600);
-      background: var(--color-blue-600);
-      color: var(--color-white);
+      border-color: var(--interactive);
+      background: var(--interactive);
+      color: var(--on-interactive);
     }
   }
 
@@ -220,7 +288,7 @@
   }
 
   .project-preview > img,
-  .social-link img {
+  .social-link {
     transition: none;
   }
 
