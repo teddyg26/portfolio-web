@@ -272,6 +272,20 @@
   }
 }
 
+/* Temporarily override component hover timings only while changing palettes.
+   Leave opacity and transforms alone so the cursor and layout keep behaving. */
+@media (prefers-reduced-motion: no-preference) {
+  html[data-theme-transition],
+  html[data-theme-transition] *,
+  html[data-theme-transition] *::before,
+  html[data-theme-transition] *::after {
+    transition-property: color, background-color, border-color, outline-color, fill, stroke !important;
+    transition-duration: 500ms !important;
+    transition-timing-function: ease !important;
+    transition-delay: 0s !important;
+  }
+}
+
 @keyframes type-name {
   from { width: 0; }
   to { width: 11ch; }

@@ -6,6 +6,8 @@
   const validTheme = (value) => value === "dark" || value === "light";
   let preference = null;
   let button;
+  let previousDark;
+  let transitionTimer;
 
   try {
     const saved = localStorage.getItem(storageKey);
@@ -15,11 +17,22 @@
   }
 
   function applyTheme() {
+    const dark = (preference ?? (systemLight.matches ? "light" : "dark")) === "dark";
+    // Animate changes, not the initial saved preference. Restart the window on
+    // rapid toggles so CSS can smoothly reverse from the current colors.
+    if (previousDark !== undefined && dark !== previousDark) {
+      root.dataset.themeTransition = "";
+      clearTimeout(transitionTimer);
+      transitionTimer = setTimeout(() => {
+        delete root.dataset.themeTransition;
+      }, 700);
+    }
+    previousDark = dark;
+
     // Without an override, CSS follows the system even with JavaScript disabled.
     if (preference) root.dataset.theme = preference;
     else delete root.dataset.theme;
 
-    const dark = (preference ?? (systemLight.matches ? "light" : "dark")) === "dark";
     if (button) {
       button.setAttribute("aria-pressed", String(dark));
       button.title = dark

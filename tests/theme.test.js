@@ -6,6 +6,8 @@ const source = readFileSync(new URL("../public/theme.js", import.meta.url), "utf
 
 function page({ saved = null, light = false, storageBlocked = false } = {}) {
   const events = {};
+  const timers = new Map();
+  let nextTimer = 0;
   const root = { dataset: {} };
   const button = {
     hidden: true,
@@ -18,6 +20,11 @@ function page({ saved = null, light = false, storageBlocked = false } = {}) {
   };
   let stored = saved;
   runInNewContext(source, {
+    setTimeout(callback, delay) {
+      timers.set(++nextTimer, { callback, delay });
+      return nextTimer;
+    },
+    clearTimeout(id) { timers.delete(id); },
     document: {
       documentElement: root,
       getElementById: () => button,
@@ -32,7 +39,7 @@ function page({ saved = null, light = false, storageBlocked = false } = {}) {
       setItem(key, value) { if (storageBlocked) throw Error("blocked"); stored = value; },
     },
   });
-  return { root, button, system, events, stored: () => stored };
+  return { root, button, system, events, timers, stored: () => stored };
 }
 
 test("saved theme is applied before DOM content loads", () => {
@@ -92,4 +99,21 @@ test("blocked storage does not break toggling", () => {
   expect(p.root.dataset.theme).toBe("light");
   p.events.click();
   expect(p.root.dataset.theme).toBe("dark");
+});
+
+test("initial load is immediate; theme changes fade for 700 ms and restart on reversal", () => {
+  const p = page({ saved: "dark" });
+  p.events.DOMContentLoaded();
+  expect(p.root.dataset.themeTransition).toBeUndefined();
+  expect(p.timers.size).toBe(0);
+  p.events.click();
+  expect(p.root.dataset.themeTransition).toBe("");
+  const firstTimer = [...p.timers.keys()][0];
+  p.events.click();
+  expect(p.timers.has(firstTimer)).toBe(false);
+  expect(p.timers.size).toBe(1);
+  const timer = [...p.timers.values()][0];
+  expect(timer.delay).toBe(700);
+  timer.callback();
+  expect(p.root.dataset.themeTransition).toBeUndefined();
 });
