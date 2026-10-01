@@ -102,7 +102,7 @@
   }
 
   .site-footer {
-    background: var(--surface);
+    background: var(--hero);
   }
 
   .theme-toggle {
