@@ -1,6 +1,26 @@
 @import "tailwindcss" source(none);
 @source "../public/index.html";
 
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("./assets/fonts/jetbrains-mono-regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("./assets/fonts/jetbrains-mono-semibold.ttf") format("truetype");
+}
+
+@theme {
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
 @layer base {
   html {
     /* Share the navbar height with the hero and anchor-scroll offsets. */
@@ -35,6 +55,58 @@
   .hero {
     min-height: calc(100vh - var(--header-height));
     min-height: calc(100svh - var(--header-height));
+  }
+
+  .hero-name {
+    font-size: 2.34375rem; /* 125% of the original 1.875rem. */
+    line-height: 1.2;
+  }
+
+  .hero-title {
+    font-size: 1.40625rem; /* 125% of the original 1.125rem. */
+    line-height: 1.75rem;
+  }
+
+  .typewriter {
+    display: inline-flex;
+    align-items: center;
+    vertical-align: top;
+    font-variant-ligatures: none;
+  }
+
+  .typewriter-text {
+    width: 11ch; /* Includes the space in "Ted Garneau". */
+    overflow: hidden;
+    white-space: nowrap;
+    animation: type-name 700ms steps(11, end) both;
+  }
+
+  .typewriter::after {
+    content: "";
+    width: 1ch;
+    height: 1em;
+    flex: none;
+    background: currentColor;
+    animation: blink-cursor 1200ms step-end 700ms infinite;
+  }
+
+  .social-link {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+  }
+
+  .social-link img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    transition: filter 200ms ease;
+  }
+
+  .social-link:hover img,
+  .social-link:focus-visible img {
+    filter: invert(1);
   }
 
   .skip-link {
@@ -132,12 +204,28 @@
   }
 }
 
+@keyframes type-name {
+  from { width: 0; }
+  to { width: 11ch; }
+}
+
+@keyframes blink-cursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
 
-  .project-preview > img {
+  .project-preview > img,
+  .social-link img {
     transition: none;
+  }
+
+  .typewriter-text,
+  .typewriter::after {
+    animation: none;
   }
 }

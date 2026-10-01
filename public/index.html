@@ -5,9 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Portfolio of Ted Garneau, software engineer.">
     <title>Ted Garneau | Software Engineer</title>
+    <link rel="preload" href="./assets/fonts/jetbrains-mono-regular.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="./assets/fonts/jetbrains-mono-semibold.ttf" as="font" type="font/ttf" crossorigin>
     <link rel="stylesheet" href="./styles.css">
   </head>
-  <body class="font-sans leading-relaxed">
+  <body class="font-mono leading-relaxed">
     <a class="skip-link" href="#main-content">Skip to content</a>
 
     <header class="site-header sticky top-0 z-10 border-b">
@@ -25,8 +27,11 @@
     <main id="main-content" tabindex="-1">
       <div class="hero flex items-center bg-neutral-950 py-10 text-white">
         <div class="mx-auto w-full max-w-4xl px-4">
-          <h1 class="text-3xl font-semibold">Ted Garneau</h1>
-          <p class="mt-2 text-lg">Software Engineer</p>
+          <h1 class="hero-name font-semibold">
+            <span class="sr-only">Ted Garneau</span>
+            <span class="typewriter" aria-hidden="true"><span class="typewriter-text">Ted Garneau</span></span>
+          </h1>
+          <p class="hero-title mt-2">Software Engineer</p>
         </div>
       </div>
 
@@ -163,10 +168,8 @@
           <!-- TODO: Add your public email address and mailto href; remove aria-disabled. -->
           <p><a class="text-link" role="link" href="mailto:teddygarneau@gmail.com">teddygarneau@gmail.com</a></p>
           <ul class="flex gap-6" role="list" aria-label="Social profiles">
-            <!-- TODO: Add profile hrefs and remove aria-disabled. Replace text with supplied SVG logos later. -->
-            <!-- Keep each link's accessible name; logos can use currentColor and aria-hidden="true". -->
-            <li><a class="text-link" role="link" aria-label="GitHub" href="https://github.com/teddyg26/">GitHub</a></li>
-            <li><a class="text-link" role="link" aria-label="LinkedIn" href="https://www.linkedin.com/in/theodore-garneau-ba83a7241/?isSelfProfile=true">LinkedIn</a></li>
+            <li><a class="social-link" aria-label="GitHub" href="https://github.com/teddyg26/"><img src="./assets/icons/github.svg" width="32" height="32" alt=""></a></li>
+            <li><a class="social-link" aria-label="LinkedIn" href="https://www.linkedin.com/in/theodore-garneau-ba83a7241/?isSelfProfile=true"><img src="./assets/icons/linkedin.svg" width="32" height="32" alt=""></a></li>
           </ul>
         </div>
       </div>
