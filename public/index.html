@@ -52,7 +52,7 @@
           <!-- Replace this slot with your portrait, including alt, width, and height. -->
           <!-- <div class="asset-placeholder aspect-square">Portrait to be added</div> -->
           <picture>
-            <img src="./assets/self-france.webp" alt="A picture of Ted in Paris">
+            <img src="./assets/self-france.webp" alt="A picture of Ted in Paris" loading="eager">
           </picture>
           <div>
             <!-- TODO: Add your introduction. -->
@@ -76,7 +76,7 @@
           <!-- Replace this slot with your own photo and descriptive alt text. -->
           <!-- <div class="asset-placeholder aspect-square">Personal photo to be added</div> -->
           <picture>
-            <img src="./assets/quebec.webp" alt="Chateau Frontenac, Quebec City, Quebec">
+            <img src="./assets/quebec.webp" alt="Chateau Frontenac, Quebec City, Quebec" loading="lazy">
           </picture>
         </div>
       </section>
@@ -153,8 +153,14 @@
 
           <article class="project" aria-labelledby="project-2-heading">
             <div class="project-preview">
-              <!-- Replace this slot with an img using descriptive alt text, width, height, and loading="lazy". -->
-              <span class="asset-placeholder aspect-video">Project preview to be added</span>
+              <img
+                src="./assets/zig-schsim-preview.webp"
+                alt="Zig CPU Scheduler Sim showing a process scheduling trace in a macOS terminal window"
+                width="1296"
+                height="994"
+                loading="lazy"
+                decoding="async"
+              >
             </div>
             <div class="project-copy">
               <h3 class="text-xl font-semibold" id="project-2-heading">
@@ -178,7 +184,7 @@
             </div>
             <div class="project-copy">
               <h3 class="text-xl font-semibold" id="project-3-heading">
-                <a class="text-link" href="https://github.com/teddyg26/tactics-tower-defense" target="_blank" rel="noopener">GMTK Game Jame 2026</a>
+                <a class="text-link" href="https://github.com/teddyg26/tactics-tower-defense" target="_blank" rel="noopener">GMTK Game Jam 2026</a>
               </h3>
               <!-- TODO: Explain the problem, your contribution, and the result. -->
               <p class="mt-2">
