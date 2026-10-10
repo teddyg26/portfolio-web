@@ -9,12 +9,19 @@ function preview({ reduced = false, observed = true } = {}) {
   const observers = [];
   const sources = [{ dataset: { src: "av1.webm" } }, { dataset: { src: "vp9.webm" } }];
   const classes = new Set();
+  const buttonClasses = new Set();
+  const timers = new Map();
+  let nextTimer = 0;
   const media = { classList: { add: (v) => classes.add(v), remove: (v) => classes.delete(v) } };
   const button = {
     hidden: true,
     setAttribute(key, value) { this[key] = value; },
-    classList: { toggle() {} },
-    addEventListener(name, fn) { events.click = fn; },
+    classList: {
+      add: (value) => buttonClasses.add(value),
+      remove: (value) => buttonClasses.delete(value),
+      toggle(value, force) { if (force) buttonClasses.add(value); else buttonClasses.delete(value); },
+    },
+    addEventListener(name, fn) { events[name] = fn; },
   };
   const motion = {
     matches: reduced,
@@ -52,9 +59,11 @@ function preview({ reduced = false, observed = true } = {}) {
     document,
     window: { matchMedia: () => motion, ...(observed ? { IntersectionObserver: Observer } : {}) },
     IntersectionObserver: Observer,
+    setTimeout(callback, delay) { timers.set(++nextTimer, { callback, delay }); return nextTimer; },
+    clearTimeout(id) { timers.delete(id); },
   });
   return {
-    video, button, sources, document, motion, events, classes,
+    video, button, sources, document, motion, events, classes, buttonClasses, timers,
     approach(value = true) { observers[0].callback([{ isIntersecting: value }]); },
     show(value = true, ratio = value ? 1 : 0) {
       observers[1].callback([{ isIntersecting: value, intersectionRatio: ratio }]);
@@ -144,4 +153,33 @@ test("playback starts on the first viewport intersection and pauses on exit", ()
   expect(p.video.plays).toBe(1);
   p.show(false);
   expect(p.video.paused).toBe(true);
+});
+
+test("touch feedback stays for one second and each tap restarts the timer", () => {
+  const p = preview();
+  expect(p.buttonClasses.has("is-revealed")).toBe(false);
+  p.events.pointerdown({ pointerType: "touch" });
+  p.events.click();
+  expect(p.buttonClasses.has("is-touch")).toBe(true);
+  expect(p.buttonClasses.has("is-revealed")).toBe(true);
+  const first = [...p.timers.keys()][0];
+  expect(p.timers.get(first).delay).toBe(1000);
+  p.events.click();
+  expect(p.timers.has(first)).toBe(false);
+  expect(p.timers.size).toBe(1);
+  [...p.timers.values()][0].callback();
+  expect(p.buttonClasses.has("is-revealed")).toBe(false);
+  expect(p.buttonClasses.has("is-touch")).toBe(true);
+});
+
+test("mouse and keyboard controls do not keep the touch-only visibility state", () => {
+  const p = preview();
+  p.events.pointerdown({ pointerType: "touch" });
+  p.events.keydown();
+  expect(p.buttonClasses.has("is-touch")).toBe(false);
+  p.events.click();
+  expect(p.timers.size).toBe(0);
+  p.events.pointerdown({ pointerType: "touch" });
+  p.events.pointerenter({ pointerType: "mouse" });
+  expect(p.buttonClasses.has("is-touch")).toBe(false);
 });

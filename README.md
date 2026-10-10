@@ -157,7 +157,8 @@ For each project:
 
 The Wolfenstein preview has a full-area play/pause button: hovering or focusing
 it darkens the video and reveals a circular Lucide icon. On touch devices the
-icon stays visible. Video sources load near the viewport; playback starts on
+icon appears after each tap, stays for one second, then fades away. Video sources
+load near the viewport; playback starts on
 any viewport intersection and pauses when completely outside it or in a hidden
 tab. Manual pauses persist, and reduced-motion visitors see the static poster
 until they choose Play. The image previews are not links.

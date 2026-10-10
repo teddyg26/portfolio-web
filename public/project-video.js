@@ -15,6 +15,8 @@
   let failed = false;
   let pending = false;
   let playRequest = 0;
+  let touchInteraction = false;
+  let feedbackTimer;
 
   // Explicit Play permits motion; scrolling alone never overrides the preference.
   function enabled() {
@@ -81,6 +83,17 @@
     update();
   });
 
+  function trackPointer(event) {
+    touchInteraction = event.pointerType === "touch" || event.pointerType === "pen";
+    button.classList.toggle("is-touch", touchInteraction);
+  }
+
+  button.addEventListener("pointerdown", trackPointer);
+  button.addEventListener("pointerenter", trackPointer);
+  button.addEventListener("keydown", () => {
+    touchInteraction = false;
+    button.classList.remove("is-touch");
+  });
   button.addEventListener("click", () => {
     if (enabled()) {
       pausedByUser = true;
@@ -89,6 +102,14 @@
       manualPlayback = true;
     }
     update();
+    if (touchInteraction) {
+      // Each tap restarts the one-second hold; CSS handles the fade afterwards.
+      button.classList.add("is-revealed");
+      clearTimeout(feedbackTimer);
+      feedbackTimer = setTimeout(() => {
+        button.classList.remove("is-revealed");
+      }, 1000);
+    }
   });
   document.addEventListener("visibilitychange", update);
   reducedMotion.addEventListener("change", () => {

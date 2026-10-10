@@ -222,6 +222,7 @@
     aspect-ratio: 1034 / 720;
     overflow: hidden;
     border-radius: 1.7% / 2.44%;
+    isolation: isolate;
   }
 
   .wolf-media > img,
@@ -230,6 +231,9 @@
     width: 100%;
     height: 100%;
     object-fit: contain;
+    /* Clip the media layer itself: mobile Safari can bypass parent rounding. */
+    border-radius: inherit;
+    clip-path: inset(0 round 1.7% / 2.44%);
   }
 
   .wolf-media > video {
@@ -243,7 +247,7 @@
     opacity: 1;
   }
 
-  .wolf-media:has(.wolf-control:focus-visible) {
+  .wolf-media:has(.wolf-control:not(.is-touch):focus-visible) {
     outline: 2px solid var(--interactive);
     outline-offset: 4px;
   }
@@ -288,17 +292,16 @@
 
   .wolf-control:focus-visible {
     outline: none;
+  }
+
+  .wolf-control.is-revealed,
+  .wolf-control:not(.is-touch):focus-visible {
     background: rgb(0 0 0 / 20%);
   }
 
-  .wolf-control:focus-visible .wolf-control-circle {
+  .wolf-control.is-revealed .wolf-control-circle,
+  .wolf-control:not(.is-touch):focus-visible .wolf-control-circle {
     opacity: 1;
-  }
-
-  @media (hover: none) {
-    .wolf-control-circle {
-      opacity: 1;
-    }
   }
 
   .text-link[href]:focus-visible {
@@ -323,11 +326,11 @@
   }
 
   @media (hover: hover) {
-    .wolf-control:hover {
+    .wolf-control:not(.is-touch):hover {
       background: rgb(0 0 0 / 20%);
     }
 
-    .wolf-control:hover .wolf-control-circle {
+    .wolf-control:not(.is-touch):hover .wolf-control-circle {
       opacity: 1;
     }
 
