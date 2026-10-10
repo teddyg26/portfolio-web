@@ -149,15 +149,21 @@ contact details have been invented.
 For each project:
 
 1. Replace the title and description with your content.
-2. Add the same repository URL as `href` on the preview and title anchors, then
-   remove their `aria-disabled` attributes and the repository placeholder text.
+2. Add the repository URL to the title link and the GitHub Repo button. Keep
+   picture previews inside a non-interactive `.project-preview` container.
 3. Replace the preview slot with an `img` whose `src` points into `./assets/`.
    Supply descriptive `alt`, actual `width` and `height`, and `loading="lazy"` for
-   previews below the initial viewport. Update the preview link's `aria-label`
-   to identify the project and destination.
+   previews below the initial viewport.
 
-Linked images dim on hover and keyboard focus. Links also have visible focus
-outlines. Anchors without URLs are deliberately inactive rather than linking to
+The Wolfenstein preview has a full-area play/pause button: hovering or focusing
+it darkens the video and reveals a circular Lucide icon. On touch devices the
+icon stays visible. Video sources load near the viewport; playback starts on
+any viewport intersection and pauses when completely outside it or in a hidden
+tab. Manual pauses persist, and reduced-motion visitors see the static poster
+until they choose Play. The image previews are not links.
+
+Repository buttons follow the active palette and have lightly rounded corners.
+Links and controls have visible focus outlines. Anchors without URLs are deliberately inactive rather than linking to
 `#` or fabricated destinations. Duplicate a project article and give its heading
 a unique ID to add another entry; keep `aria-labelledby` in sync. The wide layout
 alternates image placement automatically, while the narrow layout always puts

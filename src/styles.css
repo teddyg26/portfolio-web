@@ -214,7 +214,91 @@
   .project-preview > img {
     width: 100%;
     height: auto;
-    transition: filter 150ms ease;
+  }
+
+  .wolf-media {
+    display: block;
+    position: relative;
+    aspect-ratio: 1034 / 720;
+    overflow: hidden;
+    border-radius: 1.7% / 2.44%;
+  }
+
+  .wolf-media > img,
+  .wolf-media > video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .wolf-media > video {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .wolf-media.has-frames > video {
+    opacity: 1;
+  }
+
+  .wolf-media:has(.wolf-control:focus-visible) {
+    outline: 2px solid var(--interactive);
+    outline-offset: 4px;
+  }
+
+  .wolf-control {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    transition: background-color 150ms ease;
+  }
+
+  .wolf-control-circle {
+    display: grid;
+    place-items: center;
+    width: 3.5rem;
+    height: 3.5rem;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    background: var(--header);
+    color: var(--text);
+    opacity: 0;
+    transition: opacity 150ms ease;
+  }
+
+  .wolf-control-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    background: currentColor;
+    mask: url("./assets/icons/pause.svg") center / contain no-repeat;
+  }
+
+  .wolf-control.is-paused .wolf-control-icon {
+    mask-image: url("./assets/icons/play.svg");
+  }
+
+  .wolf-control:focus-visible {
+    outline: none;
+    background: rgb(0 0 0 / 20%);
+  }
+
+  .wolf-control:focus-visible .wolf-control-circle {
+    opacity: 1;
+  }
+
+  @media (hover: none) {
+    .wolf-control-circle {
+      opacity: 1;
+    }
   }
 
   .text-link[href]:focus-visible {
@@ -222,33 +306,37 @@
     text-decoration: underline;
   }
 
-  .project-preview[href]:focus-visible > img {
-    filter: brightness(0.8);
-  }
-
   .button-link {
     display: inline-block;
-    border: 1px solid currentColor;
+    border: 1px solid var(--border);
+    border-radius: 0.4rem;
     padding: 0.5rem 1rem;
+    background: var(--header);
+    color: var(--text);
+    transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
   }
 
-  .button-link[href]:focus-visible {
+  .button-link:is([href], button):focus-visible {
     border-color: var(--interactive);
     background: var(--interactive);
     color: var(--on-interactive);
   }
 
   @media (hover: hover) {
+    .wolf-control:hover {
+      background: rgb(0 0 0 / 20%);
+    }
+
+    .wolf-control:hover .wolf-control-circle {
+      opacity: 1;
+    }
+
     .text-link[href]:hover {
       color: var(--interactive);
       text-decoration: underline;
     }
 
-    .project-preview[href]:hover > img {
-      filter: brightness(0.8);
-    }
-
-    .button-link[href]:hover {
+    .button-link:is([href], button):hover {
       border-color: var(--interactive);
       background: var(--interactive);
       color: var(--on-interactive);
@@ -301,7 +389,9 @@
     scroll-behavior: auto;
   }
 
-  .project-preview > img,
+  .wolf-control,
+  .wolf-control-circle,
+  .button-link,
   .social-link {
     transition: none;
   }
