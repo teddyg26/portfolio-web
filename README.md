@@ -163,6 +163,10 @@ any viewport intersection and pauses when completely outside it or in a hidden
 tab. Manual pauses persist, and reduced-motion visitors see the static poster
 until they choose Play. The image previews are not links.
 
+The video and poster have rounded clipping plus small page-colored corner covers
+for mobile video compositors that bypass clipping. The covers follow the active
+theme and assume the preview sits on the solid page background.
+
 Repository buttons follow the active palette and have lightly rounded corners.
 Links and controls have visible focus outlines. Anchors without URLs are deliberately inactive rather than linking to
 `#` or fabricated destinations. Duplicate a project article and give its heading
