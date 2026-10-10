@@ -216,6 +216,11 @@
     height: auto;
   }
 
+  #about img,
+  .project-preview > img {
+    border-radius: 1rem;
+  }
+
   .wolf-media {
     display: block;
     position: relative;

@@ -1,5 +1,6 @@
 # Asset sources
 
+- `gmtk-game-preview.webp`: Ted's gameplay screenshot (`Screenshot 2026-10-10 at 12.56.37 AM.png`), cropped to the game area (1920×1080 at +536+402) with a 60-pixel rounded alpha mask. Encoded using ImageMagick as lossless WebP with method 6; the source resolution is retained.
 - `zig-schsim-preview.webp`: Ted's terminal screenshot (`Screenshot 2026-10-10 at 12.40.15 AM.png`), cropped to the macOS window (1296×994 at +14+14) with a 40-pixel rounded alpha mask. Encoded using ImageMagick as lossless WebP with method 6; the source resolution is retained.
 - JetBrains Mono regular (400) and semibold (600): downloaded from the Google Fonts CSS API for https://fonts.google.com/specimen/JetBrains+Mono. The SIL Open Font License is included in `fonts/OFL.txt`.
 - `icons/github.svg`: unmodified `GitHub_Invertocat_Black.svg` from https://brand.github.com/GitHub_Logos.zip, linked at https://brand.github.com/foundations/logo.

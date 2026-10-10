@@ -167,6 +167,11 @@ The video and poster have rounded clipping plus small page-colored corner covers
 for mobile video compositors that bypass clipping. The covers follow the active
 theme and assume the preview sits on the solid page background.
 
+The scheduler and GMTK screenshots have transparent rounded corners baked into
+their lossless WebP files. About photos and static project previews also receive
+rounded CSS corners. The GMTK project's itch.io button is inactive until its
+anchor receives an `href`; it is configured to open in a new tab.
+
 Repository buttons follow the active palette and have lightly rounded corners.
 Links and controls have visible focus outlines. Anchors without URLs are deliberately inactive rather than linking to
 `#` or fabricated destinations. Duplicate a project article and give its heading
